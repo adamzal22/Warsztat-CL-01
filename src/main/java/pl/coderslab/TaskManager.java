@@ -14,11 +14,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TaskManager {
-    static final String PATH = "tasks.csv";
     static String[][] tasks;
 
     public static void main(String[] args) {
-
+        String PATH = "tasks.csv";
         tasks = getInfo(PATH);
         System.out.println(ConsoleColors.RED+"Good day!");
         System.out.println("Welcome to the Task Manager."+ConsoleColors.RESET);
