@@ -15,22 +15,22 @@ import java.util.Scanner;
 
 public class TaskManager {
     static final String PATH = "tasks.csv";
-
     static String[][] tasks;
 
     public static void main(String[] args) {
 
         tasks = getInfo(PATH);
+        System.out.println(ConsoleColors.RED+"Good day!");
+        System.out.println("Welcome to the Task Manager."+ConsoleColors.RESET);
         menu();
         Scanner scanner = new Scanner(System.in);
-        String text = "";
         while (scanner.hasNextLine()) {
-            text = scanner.nextLine();
+            String text = scanner.nextLine();
             switch (text) {
                 case "exit":
                     saveAndExit(PATH, tasks);
-                    System.out.println(ConsoleColors.RED + "Bye, bye.");
-                    System.exit(0);
+                    System.out.println(ConsoleColors.RED + "Good bye!");
+                    System.exit(0); //wyjście z programu kod "0"//
                     break;
                 case "add":
                     add();
@@ -39,6 +39,7 @@ public class TaskManager {
                     remove(tasks);
                     break;
                 case "list":
+                    System.out.println(ConsoleColors.PURPLE+"Tasks in progress: "+ConsoleColors.RESET);
                     list(tasks);
                     break;
                 default:
@@ -48,8 +49,7 @@ public class TaskManager {
         }
     }
 
-
-        //MENU//
+    //MENU//
     public static void menu() {
         System.out.println(ConsoleColors.BLUE + "Please select an option:");
         System.out.println(ConsoleColors.YELLOW+"add");
@@ -117,6 +117,7 @@ public class TaskManager {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please tell, which number to remove.");
         int num = scanner.nextInt();
+        //Sprawdzenie czy poprawny zakres i usunięcie rekordu//
         try {
             if (num < tab.length && num >= 0) {
                 tasks = ArrayUtils.remove(tab, num);
@@ -128,14 +129,15 @@ public class TaskManager {
         }
 
     }
-    //ZAPIS//
+    //SAVE & EXIT//
     public static void saveAndExit(String file, String[][] tab) {
         Path path = Paths.get(file);
-        String[] lines = new String[tasks.length];
+        //zapisanie zmian do stringa
+        String[] lines = new String[tab.length];
         for (int i = 0; i < tab.length; i++) {
             lines[i] = String.join(",", tab[i]);
         }
-
+        //zapis do pliku
         try {
             Files.write(path, Arrays.asList(lines));
         } catch (IOException ex) {
