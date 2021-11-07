@@ -64,8 +64,10 @@ public class TaskManager {
         String[][] tab2 = null;
         try {
             List<String> words = Files.readAllLines(path);
+            //words.size - ilość elementow w stringu (linii) ; .get - odnośnik do konkretnego elementu stringa//
+            //zapis danych z pliku do tablicy 2D stringów o wym.[il.el.str][il.el.w linii]//
             tab2 = new String[words.size()][words.get(0).split(",").length];
-
+            
             for (int i = 0; i < words.size(); i++) {
                 String[] split = words.get(i).split(",");
                 for (int j = 0; j < split.length; j++) {
